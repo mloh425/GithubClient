@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 class WebViewViewController: UIViewController {
-  
+ // var htmlURL: String!
   var url: String!
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -18,6 +18,8 @@ class WebViewViewController: UIViewController {
     view.addSubview(webView)
     let urlRequest = NSURLRequest(URL: NSURL(string: url)!)
     webView.loadRequest(urlRequest)
+
+    
     // Do any additional setup after loading the view.
   }
   

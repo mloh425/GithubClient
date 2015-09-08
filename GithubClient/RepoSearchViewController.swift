@@ -14,8 +14,8 @@ class RepoSearchViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var searchBar: UISearchBar!
   var repos = [Repo]()
+  var selectedRepo : Repo!
   let imageQueue = NSOperationQueue()
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,11 +31,10 @@ class RepoSearchViewController: UIViewController {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if let webViewController = segue.destinationViewController as? WebViewViewController,
-      indexPath = self.tableView.indexPathForSelectedRow() {
-        let selectedRow = indexPath.row
-        let selectedRepo = self.repos[selectedRow]
-        webViewController.url = selectedRepo.htmlURL
+    if segue.identifier == "ShowWebVC" {
+      if let webViewController = segue.destinationViewController as? WebViewViewController{
+          webViewController.url = selectedRepo.htmlURL
+      }
     }
   }
 }
@@ -88,8 +87,6 @@ extension RepoSearchViewController : UITableViewDataSource, UITableViewDelegate 
               cell.avatarImage.image = image
               cell.avatarImage.layer.masksToBounds = true
               cell.avatarImage.layer.cornerRadius = 40
-//              cell.avatarImage.layer.borderWidth = 1
-//              cell.avatarImage.layer.borderColor = UIColor.blackColor().CGColor
             }
           })
         })
@@ -100,6 +97,8 @@ extension RepoSearchViewController : UITableViewDataSource, UITableViewDelegate 
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    let selectedRow = indexPath.row
+    selectedRepo = repos[selectedRow]
     performSegueWithIdentifier("ShowWebVC", sender: nil)
   }
 }
