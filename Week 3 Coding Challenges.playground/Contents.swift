@@ -49,8 +49,29 @@ returnMiddleThree(array4)
 //Wednesday
 //Code Challenge: Given a non-negative number "num", return true if num is within 2 of a multiple of 10. Note: (a % b) is the remainder of dividing a by b, so (7 % 5) is 2
 
+func withinTwo(num : Int) -> Bool {
+  if num % 10 == 0 {
+    return true
+  }
+  if num < 10 {
+    return 10 - num <= 2 ? true : false
+  }
+  if num % 10 > 2 && num % 10 < 8 {
+    return false
+  } else {
+    return true
+  }
+}
 
-
+withinTwo(10)
+withinTwo(12)
+withinTwo(13)
+withinTwo(17)
+withinTwo(19)
+withinTwo(18)
+withinTwo(7)
+withinTwo(8)
+withinTwo(103)
 
 //Thursday
 //Code Challenge: Given a string, return a string where for every char in the original, there are two chars.

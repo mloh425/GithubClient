@@ -16,17 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+//Figure out Button stuff, what do I want it to do!
 //    if let token = KeychainService.loadToken() { //Download keychain service
 //      
 //    } else {
 //      let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-//      if let loginVC = storyboard?.instantiateInitialViewController("LoginViewController") as? LoginViewController {
-//        
+//      if let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
+//        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//        window?.makeKeyAndVisible()
+//        window?.rootViewController = loginVC
 //      }
 //    }
     return true
   }
 
+  //This method is called everytime the app is opened externally -> passes intermediate code back
+  //-> then take intermediate code and exchange for Oauth token
   func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
     println(url)
     AuthService.exchangeCodeInURL(url)

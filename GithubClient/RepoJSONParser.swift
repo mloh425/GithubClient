@@ -16,8 +16,11 @@ class RepoJSONParser {
       if let itemsObject = rootObject["items"] as? [[String: AnyObject]] {
         for repoObject in itemsObject {
           if let name = repoObject["name"] as? String,
-            htmlURL = repoObject["html_url"] as? String {
-              let repo = Repo(name : name, htmlURL : htmlURL)
+            htmlURL = repoObject["html_url"] as? String,
+            ownerObject = repoObject["owner"] as? [String : AnyObject],
+            avatarURL = ownerObject["avatar_url"] as? String {
+              
+              let repo = Repo(name : name, htmlURL : htmlURL, avatarURL : avatarURL)
               repos.append(repo)
           }
         }

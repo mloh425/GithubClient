@@ -12,15 +12,19 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      //Oberserver = self, selector = function to be fired, name: name of ....., nil
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: "newToken", name: kTokenNotification, object: nil)
+      
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func newToken() {
+      performSegueWithIdentifier("PresentMenu", sender: nil)
     }
     
+  @IBAction func loginButton(sender: AnyObject) {
+    
+  }
 
     /*
     // MARK: - Navigation
@@ -31,5 +35,7 @@ class LoginViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: kTokenNotification, object: nil)
+  }
 }
